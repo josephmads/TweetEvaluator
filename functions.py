@@ -29,7 +29,7 @@ def get_tweets(username, max_results):
     all_tweets = []
 
     for tweet in tweets:
-        tweet = tweet.text.lower()
+        # tweet = tweet.text.lower()
         all_tweets.append(tweet)
 
     return all_tweets
@@ -55,12 +55,12 @@ def word_counter(text_str):
     
     # match_pattern = re.findall(r"[#@]*[a-z]{3,20}[']*[a-z]*", text_str) 
 
-    blacklisted = [
+    blacklisted = {
         "a", "to", "is", "if", "of", "an", "as", "or", "in", "on", "be", "and", 
         "rt", "t", "the", "that", "this", "for", "it", "so", "http", "https",
         "n\\nhttps", "are", "was", "m", "have", "has", "had", "re", "at", "by", 
         "c"
-        ]
+        }
 
     for word in matches:
         if word not in blacklisted:
@@ -75,7 +75,7 @@ def word_counter(text_str):
     for words in frequency_list:
         final_count = (words, frequency[words])
         results_list.append(final_count)
-
+    
     return results_list
 
 def evaluator(user, max_tweets, max_display):
@@ -100,9 +100,9 @@ def evaluator(user, max_tweets, max_display):
     for item in results[0:max_display]:
         word = f"\n{item[0]} - {item[1]}"
         words += word
-    # breakpoint()
+   
     return title + words    
 
 if __name__ == "__main__":
-    print(evaluator("MalleyNathan", 3200, 50))
+    print(evaluator("josephmads", 3200, 50))
     

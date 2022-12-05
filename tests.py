@@ -1,5 +1,5 @@
 from unittest import TestCase
-from functions import get_tweets, word_counter
+from functions import get_tweets, word_counter, regex, blacklisted
 import re
 
 
@@ -18,8 +18,7 @@ class TestTweetEvaluatorFunctions(TestCase):
 
     def test_word_counter_regex_matches_correct_patterns(self):
         """Verifies regex pattern finds matches correctly."""
-        regex_pattern = r"[@#]*[a-z]*[']*[a-z]\b[^\"';:.,?! ]*"
-        REGEX = re.compile(regex_pattern, re.MULTILINE | re.IGNORECASE)
+        REGEX = re.compile(regex, re.MULTILINE | re.IGNORECASE)
         text = "@josephmads #regex HELLO world! 'don't' try this?"
         self.assertTrue(REGEX.match(text))
         

@@ -7,6 +7,17 @@ import re
 api_key = env["API_KEY"]
 api_secret = env["API_KEY_SECRET"]
 
+# Global Variables
+
+regex = r"[@#]*[a-z]*[']*[a-z]\b[^\"';:.,?! ]*"
+
+blacklisted = {
+        "a", "to", "is", "if", "of", "an", "as", "or", "in", "on", "be", "and", 
+        "rt", "t", "the", "that", "this", "for", "it", "so", "http", "https",
+        "n\\nhttps", "are", "was", "m", "have", "has", "had", "re", "at", "by", 
+        "c"
+        }
+
 # Get Twitter content from user
 
 def get_tweets(username, max_results):
@@ -29,7 +40,7 @@ def get_tweets(username, max_results):
     all_tweets = []
 
     for tweet in tweets:
-        # tweet = tweet.text.lower()
+        tweet = tweet.text.lower()
         all_tweets.append(tweet)
 
     return all_tweets
@@ -49,18 +60,7 @@ def word_counter(text_str):
     results_list = []
     frequency = {}
 
-    regex = r"[@#]*[a-z]*[']*[a-z]\b[^\"';:.,?! ]*"
-
     matches = re.findall(regex, text_str, re.MULTILINE | re.IGNORECASE)
-    
-    # match_pattern = re.findall(r"[#@]*[a-z]{3,20}[']*[a-z]*", text_str) 
-
-    blacklisted = {
-        "a", "to", "is", "if", "of", "an", "as", "or", "in", "on", "be", "and", 
-        "rt", "t", "the", "that", "this", "for", "it", "so", "http", "https",
-        "n\\nhttps", "are", "was", "m", "have", "has", "had", "re", "at", "by", 
-        "c"
-        }
 
     for word in matches:
         if word not in blacklisted:

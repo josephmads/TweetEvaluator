@@ -1,11 +1,11 @@
-from os import environ as env
+from config import config as CFG
 import tweepy
 import re
 
 # Twitter Tokens
 
-api_key = env["API_KEY"]
-api_secret = env["API_KEY_SECRET"]
+api_key = CFG["API_KEY"]
+api_secret = CFG["API_KEY_SECRET"]
 
 # Global Variables
 
